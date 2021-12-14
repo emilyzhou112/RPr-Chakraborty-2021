@@ -57,7 +57,7 @@ Other software are not specified in the publication; however data files and comm
 ```{r setup, message = FALSE, include = FALSE}
 # list of required packages
 # we could probably be listing them all here, making the previous block redundant.
-packages = c("tidycensus", "tidyverse", "downloader", "haven", "stars", "dplyr", "sf", "rdhs", "classInt", "readr", "ggplot2", "here", "s2", "pastecs", "tmap", "vtable", "SpatialEpi", "svDialogs", "geepack")
+packages = c("tidycensus", "tidyverse", "downloader", "haven", "stars", "dplyr", "sf", "rdhs", "classInt", "readr", "ggplot2", "here", "s2", "pastecs", "tmap", "SpatialEpi", "svDialogs", "geepack")
 
 # load and install required packages
 package.check <- lapply(
@@ -202,8 +202,6 @@ acs_covid <- select(acs_covid, geoid, statefp, county, county_st, covid_rate,
 
 ```{r map covid rates}
 
-# This is not a working correct map. Need to map 5
-# quintile classes of covid_rate to mach figure 1
 
 tm_shape(acs_covid) +
   tm_polygons("covid_rate", 
@@ -404,6 +402,12 @@ covid <- covid %>%
   st_transform(5070)
 ```
 
+
+tmap_save()
+
+
+
+
 ### How did the classification work?
 
 ```{r classification results}
@@ -422,6 +426,7 @@ cat("\n",
 # This reproduction uses county-based relative risk scores based on
 # paragraph 4 of the methods section of the paper and Desjardins et al
 ```
+
 ## Map Relative Risk Scores
 
 Note that relative risk is > 1 only if the county was in a cluster
